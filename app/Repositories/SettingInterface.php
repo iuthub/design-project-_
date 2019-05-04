@@ -12,5 +12,8 @@ namespace App\Repositories;
 interface SettingInterface
 {
     public function getAll();
+
     public function update($parameters);
+
+    public function getBySlug($slugs);
 }

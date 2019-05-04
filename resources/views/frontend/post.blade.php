@@ -28,19 +28,19 @@
                     {{ Form::open(['route'=>['post.comment',$post->id]]) }}
                     <div class="form-group">
                         {{ Form::label('name',__('Name')) }}
-                        {{ Form::text('name',null,['class'=> 'form-control','required']) }}
+                        {{ Form::text('name', get_name_for_comment_form(),['class'=> $errors->has('name') ? 'form-control is-invalid' : 'form-control','required']) }}
                         <span class="invalid-feedback">{{ $errors->first('name') }}</span>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('email',__('Email')) }}
-                        {{ Form::email('email',null,['class'=> 'form-control','required']) }}
+                        {{ Form::email('email',get_email_for_comment_form(),['class'=> $errors->has('email') ? 'form-control is-invalid' : 'form-control'','required']) }}
                         <span class="invalid-feedback">{{ $errors->first('email') }}</span>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('comment',__('Comment')) }}
-                        {{ Form::textarea('content',null,['class'=> 'form-control','rows'=>3,'required']) }}
+                        {{ Form::textarea('content',null,['class'=> $errors->has('comment') ? 'form-control is-invalid' : 'form-control','rows'=>3,'required']) }}
                         <span class="invalid-feedback">{{ $errors->first('content') }}</span>
                     </div>
 

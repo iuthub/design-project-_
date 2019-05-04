@@ -8,10 +8,14 @@ use App\Repositories\CategoryInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CommentInterface;
 use App\Repositories\CommentRepository;
+use App\Repositories\ContactInterface;
+use App\Repositories\ContactRepository;
 use App\Repositories\MediaInterface;
 use App\Repositories\MediaRepository;
 use App\Repositories\PostInterface;
 use App\Repositories\PostRepository;
+use App\Repositories\SettingInterface;
+use App\Repositories\SettingRepository;
 use App\Repositories\SubscriberInterface;
 use App\Repositories\SubscriberRepository;
 use App\Repositories\TagInterface;
@@ -44,5 +48,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(AuthorInterface::class, AuthorRepository::class);
         $this->app->bind(MediaInterface::class, MediaRepository::class);
+        $this->app->bind(ContactInterface::class, ContactRepository::class);
+        $this->app->bind(SettingInterface::class, SettingRepository::class);
     }
 }

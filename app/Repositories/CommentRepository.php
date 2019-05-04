@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class CommentRepository implements CommentInterface
 {
@@ -30,6 +31,8 @@ class CommentRepository implements CommentInterface
             $author = app(AuthorInterface::class)->firstOrCreate($parameters);
             $authorId = $author->id;
             $type = 'App\Models\Author';
+            Cookie::queue('author_name', $author->name);
+            Cookie::queue('author_email', $author->email);
         }
         $inputs = [
             'post_id' => $postId,
@@ -38,6 +41,8 @@ class CommentRepository implements CommentInterface
             'authorable_id' => $authorId,
             'content' => $parameters['content']
         ];
+
+
         return Comment::create($inputs);
     }
 

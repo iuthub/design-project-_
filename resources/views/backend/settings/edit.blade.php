@@ -35,6 +35,11 @@
                         </div>
 
                         <div class="form-group">
+                            {{ Form::label('contact_email',__('Contact Mail')) }}
+                            {{ Form::text('contact_email', old('contact_email', optional($settings->firstWhere('slug','contact_email'))->value),['class'=> 'form-control']) }}
+                        </div>
+
+                        <div class="form-group">
                             {{ Form::submit('Update',['class'=> 'btn btn-primary']) }}
                         </div>
 

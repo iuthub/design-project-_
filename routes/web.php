@@ -14,11 +14,11 @@
 use App\Models\Media;
 
 Route::get('/', 'HomeController@index')->name('blog');
-Route::get('/about', 'AboutController')->name('about');
-Route::get('/contact', 'ContactController@contactForm')->name('contact');
-Route::post('/contact', 'ContactController@contact')->name('contact');
+Route::view('/about', 'frontend.about')->name('about');
+Route::view('/contact', 'frontend.contact')->name('contact');
+Route::post('/contact', 'ContactController@contact')->name('contact')->middleware('throttle:5,1');
 Route::get('post/{id}', 'PostController@show')->name('post.show');
-Route::post('post/{id}/comment', 'PostController@comment')->name('post.comment');
+Route::post('post/{id}/comment', 'PostController@comment')->name('post.comment')->middleware('throttle:10,1');
 Route::get('unsubscribe/{code}', 'PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {
