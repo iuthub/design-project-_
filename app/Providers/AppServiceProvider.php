@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Repositories\SettingRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Route::pattern('id', '[0-9]+');
 
         $settings = cache()->get('settings');
-        if (empty($settings)) {
+        if (empty($settings) && Schema::hasTable('settings')) {
             $settings = $this->app->make(SettingRepository::class)->getAll()->pluck('value', 'slug')->toArray();
             cache()->forever('settings', $settings);
         }
