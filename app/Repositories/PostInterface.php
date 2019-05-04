@@ -9,6 +9,9 @@
 namespace App\Repositories;
 
 
+
+use App\Models\Post;
+
 interface PostInterface
 {
     public function getAll();
@@ -32,4 +35,6 @@ interface PostInterface
     public function softDelete($id);
 
     public function changeState($id);
+
+    public function getRelatedTagNames(Post $post);
 }

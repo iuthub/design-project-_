@@ -15,8 +15,16 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('tags','Tags') }}
+    {{ Form::select('tags[]',isset($tags) ? $tags: [], isset($postTags) ? $postTags : null,['class'=>'form-control select2','multiple'=>true,'id'=>'tags']) }}
+</div>
+
+<div class="form-group">
     <label>
-        <input type="checkbox" class="flat-red" name="is_publish" {{ $post->is_publish ? 'checked' : '' }}> {{ __("Published") }}
+        {{ Form::radio('is_publish',1, true, ['class'=> 'flat-red']) }} {{ __("Publish") }}
+    </label>
+    <label>
+        {{ Form::radio('is_publish',0, false, ['class'=> 'flat-red']) }} {{ __("Unpublish") }}
     </label>
 </div>
 <div class="form-group">

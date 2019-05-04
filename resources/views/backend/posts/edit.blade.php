@@ -3,6 +3,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('vendor/simplemde-markdown-editor/css/simplemde.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -32,6 +33,7 @@
 @section('script')
     <script src="{{ asset('vendor/simplemde-markdown-editor/js/simplemde.min.js') }}"></script>
     <script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('vendor/select2/select2.full.min.js') }}"></script>
     <script>
         var simplemde = new SimpleMDE({
             toolbarTips: true,
@@ -43,6 +45,11 @@
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'
-        })
+        });
+
+        $('.select2').select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
     </script>
 @endsection

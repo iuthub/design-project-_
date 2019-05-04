@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostRepository implements PostInterface
 {
@@ -27,8 +28,8 @@ class PostRepository implements PostInterface
             'is_publish' => __('Published')
         ];
         $this->sortingOrders = [
-            'asc' => __('Ascending'),
-            'desc' => __('Descending')
+            'desc' => __('Descending'),
+            'asc' => __('Ascending')
         ];
         $this->model = $post;
     }
@@ -38,19 +39,85 @@ class PostRepository implements PostInterface
         return $this->model->all();
     }
 
+    public function save($parameters)
+    {
+        $response = false;
+        try {
+            DB::transaction(function () use ($parameters, &$response) {
+                $tagIds = [];
+                if (!empty($parameters['tags'])) {
+                    $tags = $parameters['tags'];
+                    unset($parameters['tags']);
+                    $tagModel = app(TagInterface::class);
+                    foreach ($tags as $tag) {
+                        $tagData = $tagModel->model->where('name', $tag)->first();
+                        if (empty($tagData)) {
+                            $input = [
+                                'name' => $tag,
+                                'frequency' => 1
+                            ];
+                            $tagData = $tagModel->save($input);
+                        }
+                        array_push($tagIds, $tagData->id);
+                    }
+                }
+                $post = $this->model->create($parameters);
+                if (!empty($tagIds)) {
+                    $post->tags()->sync($tagIds);
+                }
+                $response = true;
+            });
+        } catch (\Exception $exception) {
+            return false;
+        }
+        return $response;
+    }
+
+    public function update($id, $parameters)
+    {
+        $response = false;
+        try {
+            DB::transaction(function () use ($id, $parameters, &$response) {
+                $post = $this->getById($id);
+                $tagIds = [];
+                if (!empty($parameters['tags'])) {
+                    $tags = $parameters['tags'];
+                    unset($parameters['tags']);
+                    $tagModel = app(TagInterface::class);
+                    foreach ($tags as $tag) {
+                        $tagData = $tagModel->getByName($tag);
+                        if(empty($tagData)){
+                            $input = [
+                                'name' => $tag,
+                                'frequency' => 1
+                            ];
+                            $tagData = $tagModel->save($input);
+                        }
+                        array_push($tagIds, $tagData->id);
+                    }
+                }
+                $this->model->update($parameters);
+                if (!empty($tagIds)) {
+                    $post->tags()->sync($tagIds);
+                }
+                $response = true;
+            });
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+            return false;
+        }
+        return $response;
+    }
+
     public function getById($id)
     {
         return $this->model->where('id', $id)->first();
     }
 
-    public function save($parameters)
+    public function getRelatedTagNames(Post $post)
     {
-        return $this->model->create($parameters);
-    }
-
-    public function update($id, $parameters)
-    {
-        return $this->model->where('id', $id)->update($parameters);
+        $post->load('tags');
+        return $post->tags->pluck('name')->toArray();
     }
 
     public function paginate($itemPerPage = 15, $parameters = null)
@@ -59,6 +126,8 @@ class PostRepository implements PostInterface
         if (!is_null($parameters)) {
             if (isset($parameters['column']) && isset($parameters['order'])) {
                 $query = $query->orderBy($this->getSortingColumnNameByKey($parameters['column']), $this->getSortingOrderNameByKey($parameters['order']));
+            } else {
+                $query = $query->orderBy('id', 'desc');
             }
             if (!empty($parameters['search'])) {
                 $searchs = explode(' ', $parameters['search']);

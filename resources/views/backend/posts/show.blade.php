@@ -29,6 +29,14 @@
                             {{ Form::label('content',__('Content')) }}
                             {{ Form::textarea('content', $post->content, ['class'=>'form-control']) }}
                         </div>
+                        <div class="form-group">
+                            {{ Form::label('tags',__('Tags')) }}
+                            <span class="form-control">{{ join(', ',$tags) }}</span>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('status',__('Status')) }}
+                            <span class="form-control">{{ $post->is_publish ? __('Published') : __('Unpublished') }}</span>
+                        </div>
                     </div>
                 </div>
             </div>

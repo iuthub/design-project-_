@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Repositories\CategoryInterface;
 use App\Repositories\PostInterface;
+use App\Repositories\TagInterface;
 use App\Services\BreadcrumbService;
 use Illuminate\Http\Request;
 
@@ -39,12 +40,14 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      * @param CategoryInterface $category
+     * @param TagInterface $tag
      * @return \Illuminate\Http\Response
      */
-    public function create(CategoryInterface $category)
+    public function create(CategoryInterface $category, TagInterface $tag)
     {
         $data['categories'] = $category->getListForDropDown();
         $data['breadcrumbs'] = $this->breadcrumb->get('admin.dashboard.posts.create');
+        $data['tags'] = $tag->getDropDownList();
         return view('backend.posts.create', $data);
     }
 
@@ -55,8 +58,9 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $input = $request->only(['title', 'category_id', 'content']);
+        $input = $request->only(['title', 'category_id', 'content', 'is_publish', 'tags']);
         $input['user_id'] = 1;
+
         if ($this->post->save($input)) {
             return redirect()->route('admin.posts.index')->with('success', __('Post has been created successfully.'));
         }
@@ -74,20 +78,24 @@ class PostsController extends Controller
         $data['breadcrumbs'] = $this->breadcrumb->get('admin.dashboard.posts.show');
         $data['post'] = $this->post->getById($id);
         $data['categories'] = $category->getListForDropDown();
+        $data['tags'] = $this->post->getRelatedTagNames($data['post']);
         return view('backend.posts.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      * @param CategoryInterface $category
+     * @param TagInterface $tag
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(CategoryInterface $category, $id)
+    public function edit(CategoryInterface $category, TagInterface $tag, $id)
     {
         $data['breadcrumbs'] = $this->breadcrumb->get('admin.dashboard.posts.show');
         $data['post'] = $this->post->getById($id);
         $data['categories'] = $category->getListForDropDown();
+        $data['tags'] = $tag->getDropDownList();
+        $data['postTags'] = $this->post->getRelatedTagNames($data['post']);
         return view('backend.posts.edit', $data);
     }
 
@@ -99,8 +107,7 @@ class PostsController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
-        $input = $request->only(['title', 'category_id', 'content']);
-        $input['is_publish'] = $request->has('is_publish');
+        $input = $request->only(['title', 'category_id', 'content', 'is_publish', 'tags']);
         if ($this->post->update($id, $input)) {
             return redirect()->route('admin.posts.index')->with('success', __('Post has been updated successfully.'));
         }
@@ -124,8 +131,8 @@ class PostsController extends Controller
     {
         $currentState = request()->segment(4);
         if ($this->post->changeState($id)) {
-            return redirect()->route('admin.posts.index')->with('success', __('Post has been :state successfully.',['state'=> $currentState.'ed']));
+            return redirect()->route('admin.posts.index')->with('success', __('Post has been :state successfully.', ['state' => $currentState . 'ed']));
         }
-        return redirect()->back()->with('error', __('Post cannot be :state.',['state'=> $currentState.'ed']));
+        return redirect()->back()->with('error', __('Post cannot be :state.', ['state' => $currentState . 'ed']));
     }
 }
