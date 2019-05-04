@@ -40,6 +40,10 @@ return [
                     'name' => 'Add New Media',
                     'route_name' => 'admin.media.create'
                 ],
+                'edit' => [
+                    'name' => 'Edit Media',
+                    'route_name' => 'admin.media.edit'
+                ],
             ]
         ]
     ],

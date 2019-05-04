@@ -17,6 +17,10 @@ interface MediaInterface
 
     public function save($parameters);
 
+    public function update($id, $parameters);
+
+    public function delete($id);
+
     public function getSortingColumnNameByKey($key);
 
     public function getSortingOrderNameByKey($key);

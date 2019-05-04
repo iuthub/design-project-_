@@ -53,7 +53,7 @@
                                                     <a href="{{ route('admin.media.edit',$medium->id) }}" data-toggle="tooltip" title="{{ __('Edit') }}" class="btn btn-outline-light"><i class="fa fa-edit text-warning"></i>
                                                     </a>
 
-                                                    <a href="{{ route('admin.media.destroy',$medium->id) }}" data-toggle="tooltip" title="{{ __('Delete') }}" class="btn btn-outline-light"> <i class="fa fa-trash text-danger"></i>
+                                                    <a data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" href="{{ route('admin.media.destroy',$medium->id) }}" data-toggle="tooltip" title="{{ __('Delete') }}" class="btn btn-outline-light"> <i class="fa fa-trash text-danger"></i>
                                                     </a>
 
                                                 </div>

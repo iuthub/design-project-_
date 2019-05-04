@@ -63,7 +63,7 @@ class PostsController extends Controller
         $input['user_id'] = 1;
         if($request->hasFile('feature_image')){
             $fileName = time().'.'.$request->file('feature_image')->getClientOriginalExtension();
-            if($request->file('feature_image')->storeAs('posts/images',$fileName)){
+            if($request->file('feature_image')->storeAs('images/posts',$fileName)){
                 $input['feature_image'] = $fileName;
             }else{
                 return redirect()->back()->with('error', __('Failed to upload image.'));
@@ -119,7 +119,7 @@ class PostsController extends Controller
         $input = $request->only(['title', 'category_id', 'content', 'is_publish', 'tags']);
         if($request->hasFile('feature_image')){
             $fileName = time().'.'.$request->file('feature_image')->getClientOriginalExtension();
-            if($request->file('feature_image')->storeAs('posts/images',$fileName)){
+            if($request->file('feature_image')->storeAs('images/posts',$fileName)){
                 $input['feature_image'] = $fileName;
             }else{
                 return redirect()->back()->with('error', __('Failed to upload image.'));

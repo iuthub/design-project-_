@@ -1,94 +1,54 @@
-@extends('admin.master.master')
+@extends('layouts.backend')
 
-@section('title', 'Media Uploader')
+@section('title', 'Add New Media')
 
-@section('headcode')
-	{{ Html::style('assets/common/js/dropzone/dropzone.min.css') }}
-	<style type="text/css">
-		.uploadimagepreview{
-			list-style: none;
-		}
-		.uploadimagepreview > li > div:first-child {
-		    border-radius: 10px;
-		    height: 75px;
-		    overflow: hidden;
-		    width: 75px;
-		    margin: 10px;
-		}
-		.uploadimagepreview > li > div{
-			float: left;
-		}
-		.uploadimagepreview > li > div:last-child {
-			margin-top: 30px;
-		}
-		.uploadimagepreview > li > div span {
-		    display: block;
-		    position: relative;
-		    height: 100%;
-		    width: 100%;
-		    left: 50%;
-		    position: relative;
-		}
-		.uploadimagepreview img {
-		    height: 120px;
-		    left: 50%;
-		    margin-left: -50%;
-		    position: absolute;
-		    top: 0;
-		    width: auto;
-		    display: table;
-		    transform: translateX(-50%);
-		}
-	</style>
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('Add New Media') }}</h3>
+                        <div class="card-tools">
+                            <a class="btn btn-info"
+                               href="{{ route('admin.media.index') }}">{{ __('Media Manager') }}</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{ Form::open(['route'=>['admin.media.store'], 'class'=> 'dropzone', 'id' => 'addImages', 'files'=>true]) }}
+                        <div class="form-group">
+                            {{ Form::label('name', __('Name')) }}
+                            {{ Form::text('name', null , ['class'=> $errors->has('name') ? 'form-control is-invalid' : 'form-control']) }}
+                            <span class="invalid-feedback">{{ $errors->first('name') }}</span>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('file', __('File')) }}
+                            <div class="custom-file">
+                                {{ Form::file('file', ['class'=>$errors->has('file') ? 'custom-file-input is-invalid' : 'custom-file-input']) }}
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                <span class="invalid-feedback">{{ $errors->first('file') }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::submit(__('Upload'), ['class'=>'btn btn-success']) }}
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
-@section('breadcambs', '<i class="fa fa-dashboard"></i> Media Uploader')
-
-@section('bodycode')
-<div class="row">
-    <div class="col-md-12">
-    	{{ Form::open(array('route'=>['mediauploadprocess'], 'class'=> 'dropzone', 'id' => 'addImages', 'method'=>'post')) }}
-    	{{Form::close()}}
-	</div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-    	<ul class="uploadimagepreview">
-    		
-    	</ul>
-	</div>
-</div>
-@endsection
-
-@section('jscode')
-	{{ Html::script('assets/common/js/dropzone/dropzone.min.js') }}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			Dropzone.options.addImages ={
-				maxFilesize : 2,
-				clickable : true,
-				acceptedFiles : 'image/jpg, image/jpeg, image/png, image/gif, image/JPG, image/JPEG, image/PNG, image/GIF',
-				success : function(file, response){
-					if(file.status == 'success'){
-						handleDropzoneFileUpload.handleSuccess(response);
-					}
-					// else{
-					// 	handleDropzoneFileUpload.handleError(response);
-					// }
-				}
-			};
-
-			var handleDropzoneFileUpload = {
-				// handleError: function(response){
-				// 	myDropzone.removeFile(file);
-				// },
-				handleSuccess: function(response){
-					var imageul = $('.uploadimagepreview');
-					var mybasepath = window.location.origin;
-					var imagesrc = mybasepath + '/' + response.filepath + response.filename;
-					$(imageul).prepend('<li class="clearfix"><div><span><img src="'+imagesrc+'"></span></div> <div>'+ imagesrc +'</div></li>')
-				}
-			}
-		})
-	</script>
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('#file').on('change',function(e){
+                var fileName = e.target.files[0].name;
+                console.log(e.target.files);
+                $('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
 @endsection

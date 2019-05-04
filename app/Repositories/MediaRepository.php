@@ -31,12 +31,6 @@ class MediaRepository implements MediaInterface
         $this->model = $media;
     }
 
-
-    public function getById($id)
-    {
-        return $this->model->where('id', $id)->first();
-    }
-
     public function getAllByUserId($userId, $parameters, $pagination = true)
     {
         $query = $this->model->select();
@@ -58,7 +52,7 @@ class MediaRepository implements MediaInterface
         }
         $query = $query->where('user_id', $userId);
         if ($pagination) {
-            $itemPerPage = 4;
+            $itemPerPage = ITEM_PER_PAGE;
             return $query->paginate($itemPerPage);
         }
         return $query->get();
@@ -78,7 +72,25 @@ class MediaRepository implements MediaInterface
 
     public function save($parameters)
     {
-        // TODO: Implement save() method.
+        return $this->model->create($parameters);
+    }
+
+    public function update($id, $parameters)
+    {
+        return $this->model->where('id', $id)->update($parameters);
+    }
+
+    public function delete($id)
+    {
+        $medium = $this->getById($id);
+        $fileName = $medium->path;
+        $medium->delete();
+        return $fileName;
+    }
+
+    public function getById($id)
+    {
+        return $this->model->where('id', $id)->first();
     }
 
     public function getSortingColumns()
