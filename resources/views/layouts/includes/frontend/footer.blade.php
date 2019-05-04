@@ -7,7 +7,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
-                        <a href="{{ isset(cache('settings')['twitter_link']) ? cache('settings')['twitter_link'] : '' }}">
+                        <a target="_blank" href="{{ isset(cache('settings')['twitter_link']) ? cache('settings')['twitter_link'] : '' }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{{ isset(cache('settings')['facebook_link']) ? cache('settings')['facebook_link'] : '' }}">
+                        <a target="_blank" href="{{ isset(cache('settings')['facebook_link']) ? cache('settings')['facebook_link'] : '' }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{{ isset(cache('settings')['github_link']) ? cache('settings')['github_link'] : '' }}">
+                        <a target="_blank" href="{{ isset(cache('settings')['github_link']) ? cache('settings')['github_link'] : '' }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{{ isset(cache('settings')['linkedin_link']) ? cache('settings')['linkedin_link'] : '' }}">
+                        <a target="_blank" href="{{ isset(cache('settings')['linkedin_link']) ? cache('settings')['linkedin_link'] : '' }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{{ isset(cache('settings')['stackoverfollow_link']) ? cache('settings')['stackoverfollow_link'] : '' }}">
+                        <a target="_blank" href="{{ isset(cache('settings')['stackoverfollow_link']) ? cache('settings')['stackoverfollow_link'] : '' }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
