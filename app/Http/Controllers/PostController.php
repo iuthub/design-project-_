@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Repositories\PostInterface;
+use App\Services\BreadcrumbService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,11 +12,14 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param PostInterface $post
+     * @param BreadcrumbService $breadcrumbService
+     * @return void
      */
-    public function index(PostInterface $post)
+    public function index(PostInterface $post, BreadcrumbService $breadcrumbService)
     {
-        dd($post->model->all());
+        $data['breadcrumbs'] = $breadcrumbService->get('admin.dashboard.posts');
+        return view('backend.posts.index', $data);
     }
 
     /**

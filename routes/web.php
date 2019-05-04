@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('layouts.backend');
 });
 
-Route::group(['prefix'=> 'admin'], function(){
-    Route::resource('posts', 'PostController');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'DashBoardController')->name('admin.dashboard');
+    Route::resource('posts', 'PostController')->names('admin.posts');
 });
