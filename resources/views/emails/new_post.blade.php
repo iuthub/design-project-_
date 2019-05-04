@@ -119,7 +119,7 @@
                                                 <table width="134" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
                                                     <tr>
                                                         <td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px Arial, Helvetica, sans-serif; color:#ffffff; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#0087E0">
-                                                            <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{{ route('posts.show',$post->id) }}">{{ __('Read More') }}</a>
+                                                            <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{{ route('post.show',$post->id) }}">{{ __('Read More') }}</a>
                                                         </td>
                                                     </tr>
                                                 </table>
