@@ -9,7 +9,7 @@
                     <h2 class="post-title">{{ $post->title }}</h2>
                 </a>
                 <p class="post-meta">
-                    {{ __('Category:') }}<a style="text-decoration: none" href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>,
+                    {{ __('Category:') }}<a style="text-decoration: none" href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>
                     {{ __('Posted on: :date',['date'=> $post->created_at->format('Y-m-d')]) }}
                 </p>
                 <p class="post-description">{{ str_limit($post->content, 200) }}</p>

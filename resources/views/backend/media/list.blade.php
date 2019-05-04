@@ -1,5 +1,5 @@
 <div class="raw table-filter">
-    {{ Form::open(['method'=> 'GET']) }}
+    {{ Form::open(['method'=> 'GET','id'=> 'media-filter']) }}
     <div class="col-lg-2">
         {{ Form::select('column',$columns, $column, ['class'=> 'form-control']) }}
     </div>
@@ -7,13 +7,13 @@
         {{ Form::select('order',$orders, $order, ['class'=> 'form-control']) }}
     </div>
     <div class="col-lg-1">
-        {{ Form::submit(__('Sort'), ['class'=> 'btn btn-info']) }}
+        {{ Form::submit(__('Sort'), ['class'=> 'btn btn-info media-filter-submit']) }}
     </div>
     <div class="col-lg-6">
         {{ Form::search('search', $search, ['class'=> 'form-control','placeholder' => __('Search Item')]) }}
     </div>
     <div class="col-lg-1">
-        {{ Form::submit(__('Search'), ['class'=> 'btn btn-success']) }}
+        {{ Form::submit(__('Search'), ['class'=> 'btn btn-success media-filter-submit']) }}
     </div>
     {{ Form::close() }}
 </div>

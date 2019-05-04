@@ -7,7 +7,7 @@
                 <h2 class="post-title">{{ $post->title }}</h2>
                 <p class="post-meta">
                     {{ __('Category:') }}<a style="text-decoration: none"
-                                            href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>,
+                                            href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>
                     {{ __('Posted on: :date',['date'=> $post->created_at->format('Y-m-d')]) }}
                 </p>
                 @if(!empty($post->feature_image))
@@ -16,7 +16,7 @@
                              alt="Feature Image">
                     </div>
                 @endif
-                <p>{!! $post->content !!}</p>
+                <p>{{ \Illuminate\Mail\Markdown::parse($post->content) }}</p>
             </div>
         </div>
     </div>

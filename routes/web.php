@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('media/{id}/download', 'MediaController@download')->name('admin.media.download');
         Route::get('upload/images', 'MediaController@getUploadImages')->name('admin.media.list');
 
+        Route::get('settings', 'SettingsController@edit')->name('admin.settings');
+        Route::put('settings', 'SettingsController@update')->name('admin.settings');
+
     });
 });
 

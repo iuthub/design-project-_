@@ -33,7 +33,7 @@
         <div class="modal-dialog modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mediaTitle">{{ __('Select Image or Input URL ') }}</h5>
+                    <h5 class="modal-title" id="mediaTitle">{{ __('Select Image/Input URL') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -125,17 +125,9 @@
                 {
                     name: "custom",
                     action: function customFunction() {
-                        $.ajax({
-                            type: 'GET',
-                            url: '{{ route('admin.media.list') }}',
-                            success: function (data) {
-                                $('#media-list').html(data);
-                                $('#media').modal('show');
-                            },
-                            error: function () {
-                                console.log('error');
-                            }
-                        });
+                        var url = '{{ route('admin.media.list') }}';
+                        getMedia(url);
+                        $('#media').modal('show');
                     },
                     className: "fa fa-image",
                     title: "Custom Button",
@@ -199,6 +191,8 @@
 
         $(document).ready(function () {
             $(document).on('click', '.medium', function () {
+                $('.card-body').removeClass('active');
+                $(this).closest('.card-body').addClass('active');
                 var url = $(this).find('img').attr('src');
                 $('#url').val(url);
             });
@@ -215,7 +209,33 @@
                 if (url) {
                     _replaceSelection(cm, stat.image, options.insertTexts.image, url);
                 }
-            })
+            });
+
+            $(document).on('click', '.media-filter-submit', function (e) {
+                e.preventDefault();
+                var url = '{{ route('admin.media.list') }}';
+                var formData = $('#media-filter').serialize();
+                getMedia(url, formData);
+            });
+
+            $(document).on('click', '.page-link', function (e) {
+                e.preventDefault();
+                getMedia($(this).attr('href'));
+            });
         });
+
+        function getMedia(url, data = null) {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: data,
+                success: function (data) {
+                    $('#media-list').html(data);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
     </script>
 @endsection

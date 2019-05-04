@@ -47,10 +47,9 @@ class MediaRepository implements MediaInterface
                     });
                 }
             }
-        } else {
-            $query = $query->orderBy('id', 'desc');
         }
-        $query = $query->where('user_id', $userId);
+
+        $query = $query->where('user_id', $userId)->orderBy('id', 'desc');
         if ($pagination) {
             $itemPerPage = ITEM_PER_PAGE;
             return $query->paginate($itemPerPage);
