@@ -15,12 +15,12 @@ Route::get('/', 'HomeController@index')->name('blog');
 Route::get('/about', 'AboutController')->name('about');
 Route::get('/contact', 'ContactController@contactForm')->name('contact');
 Route::post('/contact', 'ContactController@contact')->name('contact');
-Route::get('post/{id}','PostsController@show')->name('post.show');
-Route::get('unsubscribe/{code}','PostsController@show')->name('unsubscribe')->middleware('signed');
+Route::get('post/{id}', 'DisplayPostController')->name('post.show');
+Route::get('unsubscribe/{code}', 'PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes();
-    Route::group(['middleware'=>'auth'], function (){
+    Route::group(['middleware' => 'auth', 'namespace' => 'Admin'], function () {
         Route::get('/', 'DashBoardController')->name('admin.dashboard');
         Route::resource('categories', 'CategoriesController')->names('admin.categories');
         Route::resource('posts', 'PostsController')->names('admin.posts');

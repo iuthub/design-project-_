@@ -17,10 +17,8 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->integer('post_id');
             $table->integer('comment_id')->nullable();
-            $table->integer('user_id')->nullable();
-            $table->string('author')->nullable();
-            $table->string('email')->nullable();
-            $table->string('ip')->nullable();
+            $table->string('authorable_type');
+            $table->integer('authorable_id');
             $table->longText('content');
             $table->integer('is_approve')->default(1);
             $table->timestamps();

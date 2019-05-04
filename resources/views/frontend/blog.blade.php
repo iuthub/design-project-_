@@ -12,7 +12,7 @@
                     {{ __('Category:') }}<a style="text-decoration: none" href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>,
                     {{ __('Posted on: :date',['date'=> $post->created_at->format('Y-m-d')]) }}
                 </p>
-                <p class="post-description">{{ mb_strimwidth($post->content,0,200,'..') }}</p>
+                <p class="post-description">{{ str_limit($post->content, 200) }}</p>
             </div>
             <hr>
             @endforeach

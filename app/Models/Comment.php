@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['post_id','user_id','comment_id','author','email','ip','content','is_approve'];
+    protected $fillable = ['post_id','model_type','model_id','content','is_approve'];
 
     public function post()
     {
         return $this->belongsTo(Post::class);
     }
 
-    public function user()
+    public function authorable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
-    public function comment()
+    public function comments()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 }
