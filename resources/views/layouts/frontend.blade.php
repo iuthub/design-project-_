@@ -1,14 +1,22 @@
-@include('layouts.includes.header')
+@include('layouts.includes.frontend.header')
 
-@include('layouts.includes.top_header_frontend')
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ 'img/home-bg.jpg' }}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
 
-<!-- Content Wrapper. Contains page content -->
-<div class="container-fluid main-container">
-    <!-- Main content -->
-    <section class="content">
-        @yield('content')
-    </section>
-    <!-- /.content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+   @yield('content')
 </div>
-<!-- /.content-wrapper -->
-@include('layouts.includes.frontend_footer')
+
+@include('layouts.includes.frontend.footer')

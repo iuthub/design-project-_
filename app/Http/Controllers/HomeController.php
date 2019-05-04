@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index(PostInterface $post)
     {
-                $data['posts'] = $post->paginate();
+        $data['posts'] = $post->paginate();
         return view('frontend.blog', $data);
     }
 }

@@ -2,12 +2,21 @@
 
 @section('content')
     <div class="row">
-        @foreach($posts as $post)
-            <div class="col-lg-8 offset-md-2 mt-lg-2 mb-lg-2">
-                <h3><a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a></h3>
-                <p class="blog-content text-justify">{{ mb_strimwidth($post->content,0,500,'..') }}</p>
-                <a class="pull-left" href="{{ route('posts.show',$post->id) }}">{{ __('Continue reading...') }}</a>
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @foreach($posts as $post)
+            <div class="post-preview">
+                <a href="{{ route('post.show',$post->id) }}">
+                    <h2 class="post-title">{{ $post->title }}</h2>
+                </a>
+                <p class="post-meta">
+                    {{ __('Category:') }}<a style="text-decoration: none" href="{{ route('post.show',$post->id) }}"> {{ $post->category->name }}</a>,
+                    {{ __('Posted on: :date',['date'=> $post->created_at->format('Y-m-d')]) }}
+                </p>
+                <p class="post-description">{{ mb_strimwidth($post->content,0,200,'..') }}</p>
             </div>
-        @endforeach
+            <hr>
+            @endforeach
+            {{ $posts->links() }}
+        </div>
     </div>
 @endsection

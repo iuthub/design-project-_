@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index')->name('blog');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/contact', 'HomeController@contact')->name('contact');
-
-Route::get('post/{id}','PostsController@show')->name('posts.show');
+Route::get('/about', 'AboutController')->name('about');
+Route::get('/contact', 'ContactController@contactForm')->name('contact');
+Route::post('/contact', 'ContactController@contact')->name('contact');
+Route::get('post/{id}','PostsController@show')->name('post.show');
 Route::get('unsubscribe/{code}','PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {

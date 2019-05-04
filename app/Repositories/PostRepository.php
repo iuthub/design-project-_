@@ -138,7 +138,7 @@ class PostRepository implements PostInterface
         }else {
             $query = $query->orderBy('id', 'desc');
         }
-        return $query->with('category', 'tags')->paginate($itemPerPage);
+        return $query->with('category', 'tags')->simplePaginate($itemPerPage);
     }
 
     public function getSortingColumnNameByKey($key)
