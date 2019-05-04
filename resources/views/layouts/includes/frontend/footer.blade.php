@@ -43,7 +43,7 @@
 
 <!-- Custom scripts for this template -->
 <script src="{{ asset('js/clean-blog.js') }}"></script>
-
+@yield('script')
 </body>
 
 </html>

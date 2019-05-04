@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/clean-blog.css') }}" rel="stylesheet">
-
+    @yield('style')
 </head>
 
 <body>

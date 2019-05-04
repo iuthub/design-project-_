@@ -15,7 +15,8 @@ Route::get('/', 'HomeController@index')->name('blog');
 Route::get('/about', 'AboutController')->name('about');
 Route::get('/contact', 'ContactController@contactForm')->name('contact');
 Route::post('/contact', 'ContactController@contact')->name('contact');
-Route::get('post/{id}', 'DisplayPostController')->name('post.show');
+Route::get('post/{id}', 'PostController@show')->name('post.show');
+Route::post('post/{id}/comment', 'PostController@comment')->name('post.comment');
 Route::get('unsubscribe/{code}', 'PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {

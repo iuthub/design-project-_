@@ -2,89 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Repositories\CommentInterface;
 use App\Repositories\PostInterface;
-use App\Services\BreadcrumbService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Handle the incoming request.
      *
      * @param PostInterface $post
-     * @param BreadcrumbService $breadcrumbService
+     * @param $id
      * @return void
      */
-    public function index(PostInterface $post, BreadcrumbService $breadcrumbService)
+    public function show(PostInterface $post, $id)
     {
-        $data['breadcrumbs'] = $breadcrumbService->get('admin.dashboard.posts');
-        return view('backend.posts.index', $data);
+        $data['post'] = $post->getById($id);
+        $data['post']->load(['comments' => function ($q) {
+            $q->whereNull('comment_id');
+        }, 'comments.authorable', 'comments.comments.authorable']);
+        return view('frontend.post', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function comment(Request $request, CommentInterface $comment, $id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
+        $this->validate($request,[
+           'name' => 'required',
+           'email' => 'required|email',
+           'content' => 'required',
+        ]);
+        $comment->save($id, $request->only('name','email','content','comment_id'));
+        return redirect()->back();
     }
 }

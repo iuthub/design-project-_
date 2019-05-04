@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\AuthorInterface;
+use App\Repositories\AuthorRepository;
 use App\Repositories\CategoryInterface;
 use App\Repositories\CategoryRepository;
+use App\Repositories\CommentInterface;
+use App\Repositories\CommentRepository;
 use App\Repositories\PostInterface;
 use App\Repositories\PostRepository;
 use App\Repositories\SubscriberInterface;
@@ -35,5 +39,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PostInterface::class, PostRepository::class);
         $this->app->bind(TagInterface::class, TagRepository::class);
         $this->app->bind(SubscriberInterface::class, SubscriberRepository::class);
+        $this->app->bind(CommentInterface::class, CommentRepository::class);
+        $this->app->bind(AuthorInterface::class, AuthorRepository::class);
     }
 }
