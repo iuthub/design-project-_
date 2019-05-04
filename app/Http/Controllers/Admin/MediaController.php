@@ -92,7 +92,7 @@ class MediaController extends Controller
             $newImage = $img->save(storage_path('app/public/images/media/' . $fileName), 100);
             $input['user_id'] = Auth::id();
             $input['path'] = $newImage->basename;
-            $input['extension'] = $newImage->extension;
+            $input['name'] = $newImage->filename;
             $input['extension'] = $newImage->extension;
             if ($medium = $this->mediaRepository->save($input)) {
                 return redirect()->route('admin.media.edit', $medium->id)->with('success', __('Media has been created successfully.'));
