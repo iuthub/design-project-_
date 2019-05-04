@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {{ Form::model($post,['route'=>['admin.posts.update',$post->id]]) }}
+                        {{ Form::model($post,['route'=>['admin.posts.update',$post->id],'files'=>true]) }}
                         @method('PUT')
                         @include('backend.posts._form',['buttonText'=> __('Update')])
                         {{ Form::close() }}
@@ -50,6 +50,11 @@
         $('.select2').select2({
             tags: true,
             tokenSeparators: [',', ' ']
+        });
+
+        $('#select_image').on('change',function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
         });
     </script>
 @endsection

@@ -8,6 +8,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'category_id' => $faker->numberBetween(1,5),
         'title' => $faker->sentence,
         'content' => $faker->paragraph,
+        'feature_image' => $faker->image('storage/app/public/posts/images',600,300, null, false),
         'is_publish' => $faker->boolean
     ];
 });

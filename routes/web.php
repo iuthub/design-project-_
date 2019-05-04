@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.backend');
+    try {
+        $post = \App\Models\Post::find(2);
+        Mail::to('rana@gmail.com')->send(new \App\Mail\NewPostPublished($post));
+    }catch (\Exception $e){
+        dd($e->getMessage());
+    }
 });
+
+Route::get('post/{id}','PostsController@show')->name('posts.show');
+Route::get('unsubscribe/{code}','PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'DashBoardController')->name('admin.dashboard');

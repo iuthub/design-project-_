@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(['route'=>'admin.posts.store']) }}
+                        {{ Form::open(['route'=>'admin.posts.store','files'=>true]) }}
                             @include('backend.posts._form',['buttonText'=> __('Create')])
                         {{ Form::close() }}
                     </div>
@@ -48,6 +48,11 @@
         $('.select2').select2({
             tags: true,
             tokenSeparators: [',', ' ']
+        });
+
+        $('#select_image').on('change',function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
         });
 
     </script>

@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Events\PostHasCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['user_id', 'category_id', 'title', 'content', 'is_publish'];
+    protected $fillable = ['user_id', 'category_id', 'title', 'content', 'feature_image', 'is_publish'];
+
+    protected $dispatchesEvents = [
+        'created' => PostHasCreated::class,
+    ];
 
     public function user()
     {

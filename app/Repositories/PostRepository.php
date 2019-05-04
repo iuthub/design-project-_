@@ -68,6 +68,7 @@ class PostRepository implements PostInterface
                 $response = true;
             });
         } catch (\Exception $exception) {
+            dd($exception);
             return false;
         }
         return $response;
@@ -96,7 +97,7 @@ class PostRepository implements PostInterface
                         array_push($tagIds, $tagData->id);
                     }
                 }
-                $this->model->update($parameters);
+                $this->model->where('id',$id)->update($parameters);
                 if (!empty($tagIds)) {
                     $post->tags()->sync($tagIds);
                 }

@@ -60,6 +60,14 @@ class PostsController extends Controller
     {
         $input = $request->only(['title', 'category_id', 'content', 'is_publish', 'tags']);
         $input['user_id'] = 1;
+        if($request->hasFile('feature_image')){
+            $fileName = time().'.'.$request->file('feature_image')->getClientOriginalExtension();
+            if($request->file('feature_image')->storeAs('posts/images',$fileName)){
+                $input['feature_image'] = $fileName;
+            }else{
+                return redirect()->back()->with('error', __('Failed to upload image.'));
+            }
+        }
 
         if ($this->post->save($input)) {
             return redirect()->route('admin.posts.index')->with('success', __('Post has been created successfully.'));
@@ -108,6 +116,14 @@ class PostsController extends Controller
     public function update(PostRequest $request, $id)
     {
         $input = $request->only(['title', 'category_id', 'content', 'is_publish', 'tags']);
+        if($request->hasFile('feature_image')){
+            $fileName = time().'.'.$request->file('feature_image')->getClientOriginalExtension();
+            if($request->file('feature_image')->storeAs('posts/images',$fileName)){
+                $input['feature_image'] = $fileName;
+            }else{
+                return redirect()->back()->with('error', __('Failed to upload image.'));
+            }
+        }
         if ($this->post->update($id, $input)) {
             return redirect()->route('admin.posts.index')->with('success', __('Post has been updated successfully.'));
         }

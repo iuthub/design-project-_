@@ -15,6 +15,15 @@
 </div>
 
 <div class="form-group">
+    <label for="select_image">{{ __('Feature Image') }}</label>
+    <div class="custom-file">
+        {{ Form::file('feature_image',['class' => $errors->has('feature_image') ? 'custom-file-input is-invalid' : 'custom-file-input', 'files'=>true,'id'=> 'select_image']) }}
+        {{ Form::label('select_image',__('Select Image'),['class'=> 'custom-file-label']) }}
+        <div class="invalid-feedback">{{ $errors->first('feature_image') }}</div>
+    </div>
+</div>
+
+<div class="form-group">
     {{ Form::label('tags','Tags') }}
     {{ Form::select('tags[]',isset($tags) ? $tags: [], isset($postTags) ? $postTags : null,['class'=>'form-control select2','multiple'=>true,'id'=>'tags']) }}
 </div>

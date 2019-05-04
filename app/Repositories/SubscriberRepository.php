@@ -33,6 +33,6 @@ class SubscriberRepository implements SubscriberInterface
 
     public function getAllEmails()
     {
-        return $this->model->pluck('email')->toArray();
+        return $this->model->where('is_opt_out', 0)->pluck('email')->toArray();
     }
 }

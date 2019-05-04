@@ -12,6 +12,7 @@
 @endif
 <!-- Main content -->
     <section class="content">
+        @include('backend.flash_message')
         @yield('content')
     </section>
     <!-- /.content -->

@@ -2,6 +2,11 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('vendor/simplemde-markdown-editor/css/simplemde.min.css') }}">
+    <style>
+        #feature_image{
+            width: 100%;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -28,6 +33,10 @@
                         <div class="form-group">
                             {{ Form::label('content',__('Content')) }}
                             {{ Form::textarea('content', $post->content, ['class'=>'form-control']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('feature_image',__('Feature Image')) }}
+                            <img id="feature_image" src="{{ asset("storage/posts/images/$post->feature_image") }}" alt="Feature Image">
                         </div>
                         <div class="form-group">
                             {{ Form::label('tags',__('Tags')) }}
