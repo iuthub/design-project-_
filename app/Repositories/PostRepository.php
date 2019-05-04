@@ -103,7 +103,6 @@ class PostRepository implements PostInterface
                 $response = true;
             });
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             return false;
         }
         return $response;
