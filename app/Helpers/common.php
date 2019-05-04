@@ -4,6 +4,8 @@
 use App\Repositories\SettingInterface;
 use Illuminate\Support\Facades\Cookie;
 
+define('ITEM_PER_PAGE', 15);
+
 if (!function_exists('get_name_for_comment_form')) {
     function get_name_for_comment_form()
     {
