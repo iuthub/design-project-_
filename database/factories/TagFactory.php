@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Tag::class, function (Faker $faker) {
     return [
-        'name' => $faker->randomElement(['laravel','php','queue','pusher','auth','service','user','config','helper','collection']),
+        'name' => $faker->unique()->word,
         'frequency' => $faker->numberBetween(1,50)
     ];
 });
