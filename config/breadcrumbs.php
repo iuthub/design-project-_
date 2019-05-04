@@ -13,7 +13,7 @@ return [
                     'route_name' => 'admin.posts.show',
                 ],
                 'create' => [
-                    'name' => 'Create Post',
+                    'name' => 'Add New Post',
                     'route_name' => 'admin.posts.create',
                 ],
                 'edit' => [
@@ -25,12 +25,20 @@ return [
                 'name' => 'Categories',
                 'route_name' => 'admin.categories.index',
                 'create' => [
-                    'name' => 'Create Category',
+                    'name' => 'Add New Category',
                     'route_name' => 'admin.categories.create',
                 ],
                 'edit' => [
                     'name' => 'Edit Category',
                     'route_name' => 'admin.categories.edit',
+                ],
+            ],
+            'media' => [
+                'name' => 'Media Manager',
+                'route_name' => 'admin.media.index',
+                'create' => [
+                    'name' => 'Add New Media',
+                    'route_name' => 'admin.media.create'
                 ],
             ]
         ]

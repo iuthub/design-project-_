@@ -11,6 +11,8 @@
 |
 */
 
+use App\Models\Media;
+
 Route::get('/', 'HomeController@index')->name('blog');
 Route::get('/about', 'AboutController')->name('about');
 Route::get('/contact', 'ContactController@contactForm')->name('contact');
@@ -27,7 +29,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('posts', 'PostsController')->names('admin.posts');
         Route::get('posts/{id}/publish', 'PostsController@changeState')->name('admin.posts.publish');
         Route::get('posts/{id}/unpublish', 'PostsController@changeState')->name('admin.posts.unpublish');
+
+        Route::resource('media', 'MediaController')->names('admin.media');
+        Route::get('media/{id}/download', 'MediaController@download')->name('admin.media.download');
+
     });
+});
+
+Route::get('/test', function () {
+    dd(Media::first());
 });
 
 

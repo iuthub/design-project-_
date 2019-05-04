@@ -8,6 +8,8 @@ use App\Repositories\CategoryInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CommentInterface;
 use App\Repositories\CommentRepository;
+use App\Repositories\MediaInterface;
+use App\Repositories\MediaRepository;
 use App\Repositories\PostInterface;
 use App\Repositories\PostRepository;
 use App\Repositories\SubscriberInterface;
@@ -41,5 +43,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SubscriberInterface::class, SubscriberRepository::class);
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(AuthorInterface::class, AuthorRepository::class);
+        $this->app->bind(MediaInterface::class, MediaRepository::class);
     }
 }

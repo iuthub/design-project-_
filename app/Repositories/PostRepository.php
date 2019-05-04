@@ -16,7 +16,6 @@ class PostRepository implements PostInterface
 {
     public $model;
     public $sortingColumns;
-
     public $sortingOrders;
 
     public function __construct(Post $post)

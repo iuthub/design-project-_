@@ -12,7 +12,7 @@
                 </p>
                 @if(!empty($post->feature_image))
                     <div class="featured_image text-center">
-                        <img style="width: 100%" src="{{ asset('storage/posts/images/'.$post->feature_image) }}"
+                        <img style="width: 100%" src="{{ asset('storage/images/posts/'.$post->feature_image) }}"
                              alt="Feature Image">
                     </div>
                 @endif

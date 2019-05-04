@@ -34,6 +34,12 @@
                         <p>{{ __('Posts') }}</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.media.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-folder"></i>
+                        <p>{{ __('Media Manager') }}</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
