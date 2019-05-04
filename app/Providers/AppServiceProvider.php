@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        define('ITEM_PER_PAGE', 15);
         Paginator::defaultView('backend.pagination');
     }
 

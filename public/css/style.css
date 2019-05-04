@@ -15,3 +15,20 @@
     position: relative;
     top: 10px;
 }
+.table-filter {
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.table-filter div.col-lg-1, .table-filter div.col-lg-2, .table-filter div.col-lg-3, .table-filter div.col-lg-4, .table-filter div.col-lg-5, .table-filter div.col-lg-6, .table-filter div.col-lg-7, .table-filter div.col-lg-8, .table-filter div.col-lg-9, .table-filter div.col-lg-10, .table-filter div.col-lg-11, .table-filter div.col-lg-12 {
+    float: left;
+    padding-left: 5px;
+}
+.table-filter div:first-child{
+    padding-left: 0px;
+}
+.table-filter div:last-child{
+    padding-right: 0px;
+}
+.table-filter div.col-lg-1 .btn-success{
+    width: 100%;
+}

@@ -8,6 +8,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'category_id' => $faker->numberBetween(1,5),
         'title' => $faker->sentence,
         'content' => $faker->paragraph,
-        'is_publish' => $faker->numberBetween(1,3)
+        'is_publish' => $faker->boolean
     ];
 });

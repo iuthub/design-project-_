@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('title');
             $table->longText('content');
             $table->integer('is_publish')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

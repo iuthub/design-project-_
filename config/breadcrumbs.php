@@ -8,6 +8,10 @@ return [
             'posts' => [
                 'name' => 'Posts',
                 'route_name' => 'admin.posts.index',
+                'show' => [
+                    'name' => 'Post Details',
+                    'route_name' => 'admin.posts.show',
+                ],
                 'create' => [
                     'name' => 'Create Post',
                     'route_name' => 'admin.posts.create',

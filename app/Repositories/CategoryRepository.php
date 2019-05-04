@@ -44,4 +44,9 @@ class CategoryRepository implements CategoryInterface
     {
        return $this->model->paginate($itemPerPage);
     }
+
+    public function getListForDropDown()
+    {
+        return $this->model->pluck('name','id')->toArray();
+    }
 }

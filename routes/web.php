@@ -19,4 +19,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'DashBoardController')->name('admin.dashboard');
     Route::resource('categories', 'CategoriesController')->names('admin.categories');
     Route::resource('posts', 'PostsController')->names('admin.posts');
+    Route::get('posts/{id}/publish', 'PostsController@changeState')->name('admin.posts.publish');
+    Route::get('posts/{id}/unpublish', 'PostsController@changeState')->name('admin.posts.unpublish');
 });

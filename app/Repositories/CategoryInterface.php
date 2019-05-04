@@ -18,5 +18,8 @@ interface CategoryInterface
     public function save($parameters);
 
     public function update($id, $parameters);
+
     public function paginate($itemPerPage, $parameters);
+
+    public function getListForDropDown();
 }
