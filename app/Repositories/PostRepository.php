@@ -68,7 +68,6 @@ class PostRepository implements PostInterface
                 $response = true;
             });
         } catch (\Exception $exception) {
-            dd($exception);
             return false;
         }
         return $response;
@@ -126,8 +125,6 @@ class PostRepository implements PostInterface
         if (!is_null($parameters)) {
             if (isset($parameters['column']) && isset($parameters['order'])) {
                 $query = $query->orderBy($this->getSortingColumnNameByKey($parameters['column']), $this->getSortingOrderNameByKey($parameters['order']));
-            } else {
-                $query = $query->orderBy('id', 'desc');
             }
             if (!empty($parameters['search'])) {
                 $searchs = explode(' ', $parameters['search']);
@@ -138,6 +135,8 @@ class PostRepository implements PostInterface
                     });
                 }
             }
+        }else {
+            $query = $query->orderBy('id', 'desc');
         }
         return $query->with('category', 'tags')->paginate($itemPerPage);
     }

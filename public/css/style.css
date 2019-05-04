@@ -32,3 +32,28 @@
 .table-filter div.col-lg-1 .btn-success{
     width: 100%;
 }
+.main-container{
+    min-height: 83vh;
+    padding: 40px 0px;
+}
+
+.frontend-footer{
+    margin: 0px;
+    text-align: center;
+}
+
+.frontend-top-header .logo img{
+    width: 50px;
+    margin: 5px;
+    vertical-align: middle;
+}
+.frontend-top-header .logo-text {
+    font-size: 30px;
+    margin-top: 7px;
+    position: absolute;
+    color: #655f5f4d;
+}
+.frontend-top-header .navbar {
+    padding: 0.9rem .5rem;
+    float: right;
+}

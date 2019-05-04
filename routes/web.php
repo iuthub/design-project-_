@@ -11,22 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    try {
-        $post = \App\Models\Post::find(2);
-        Mail::to('rana@gmail.com')->send(new \App\Mail\NewPostPublished($post));
-    }catch (\Exception $e){
-        dd($e->getMessage());
-    }
-});
+Route::get('/', 'HomeController@index')->name('blog');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/contact', 'HomeController@contact')->name('contact');
 
 Route::get('post/{id}','PostsController@show')->name('posts.show');
 Route::get('unsubscribe/{code}','PostsController@show')->name('unsubscribe')->middleware('signed');
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', 'DashBoardController')->name('admin.dashboard');
-    Route::resource('categories', 'CategoriesController')->names('admin.categories');
-    Route::resource('posts', 'PostsController')->names('admin.posts');
-    Route::get('posts/{id}/publish', 'PostsController@changeState')->name('admin.posts.publish');
-    Route::get('posts/{id}/unpublish', 'PostsController@changeState')->name('admin.posts.unpublish');
+    Auth::routes();
+    Route::group(['middleware'=>'auth'], function (){
+        Route::get('/', 'DashBoardController')->name('admin.dashboard');
+        Route::resource('categories', 'CategoriesController')->names('admin.categories');
+        Route::resource('posts', 'PostsController')->names('admin.posts');
+        Route::get('posts/{id}/publish', 'PostsController@changeState')->name('admin.posts.publish');
+        Route::get('posts/{id}/unpublish', 'PostsController@changeState')->name('admin.posts.unpublish');
+    });
 });
+
+
+

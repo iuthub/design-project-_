@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+            <a data-method="POST" data-token="{{ csrf_token() }}" data-confirm="{{ __('Are you sure?') }}" class="nav-link" href="{{ route('logout') }}">
                 <i class="fa fa-sign-out"></i>
             </a>
         </li>
