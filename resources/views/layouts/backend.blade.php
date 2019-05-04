@@ -7,7 +7,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-@if(isset($breadcrumbs))
+@if(isset($breadcrumbs) && !is_null($breadcrumbs))
     @include('layouts.includes.breadcrumb')
 @endif
 <!-- Main content -->

@@ -1,0 +1,17 @@
+
+.card-tools a.btn {
+    margin-top: -3px;
+}
+
+.card-footer ul.pagination {
+    margin-bottom: 0px;
+}
+
+.table-customize th {
+    background: #a2afc8;
+}
+
+.pagination-details {
+    position: relative;
+    top: 10px;
+}
