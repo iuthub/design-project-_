@@ -32,12 +32,12 @@ class CategoryRepository implements CategoryInterface
 
     public function save($parameters)
     {
-        // TODO: Implement save() method.
+        return $this->model->create($parameters);
     }
 
     public function update($id, $parameters)
     {
-        // TODO: Implement update() method.
+        return $this->model->where('id',$id)->update($parameters);
     }
 
     public function paginate($itemPerPage=15, $parameters= null)

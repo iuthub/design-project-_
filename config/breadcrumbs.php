@@ -12,8 +12,8 @@ return [
                     'name' => 'Create Post',
                     'route_name' => 'admin.posts.create',
                 ],
-                'update' => [
-                    'name' => 'Update Post',
+                'edit' => [
+                    'name' => 'Edit Post',
                     'route_name' => 'admin.posts.edit',
                 ],
             ],
@@ -24,8 +24,8 @@ return [
                     'name' => 'Create Category',
                     'route_name' => 'admin.categories.create',
                 ],
-                'update' => [
-                    'name' => 'Update Category',
+                'edit' => [
+                    'name' => 'Edit Category',
                     'route_name' => 'admin.categories.edit',
                 ],
             ]

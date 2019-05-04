@@ -9,6 +9,8 @@
 namespace App\Services;
 
 
+use Illuminate\Http\Request;
+
 class BreadcrumbService
 {
     public $config;
@@ -28,9 +30,15 @@ class BreadcrumbService
             }
             $parameter .= '.'.$config;
             $arrayConfig = array_get($this->config, $parameter);
+            if(in_array($config,['edit','show'])){
+                $route = route($arrayConfig['route_name'],request()->segment(3));
+            }else{
+                $route = route($arrayConfig['route_name']);
+            }
+
             array_push($breadcrumbs,[
                'name' => $arrayConfig['name'],
-               'url' => route($arrayConfig['route_name']),
+               'url' => $route,
             ]);
         }
        return $breadcrumbs;
