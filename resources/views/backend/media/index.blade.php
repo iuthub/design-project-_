@@ -38,8 +38,10 @@
                                 <div class="col-lg-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img width="100%" src="{{ asset('storage/images/media/'.$medium->path) }}"
+                                            <a data-title="{{ $medium->name.' ('.$medium->width.' x '.$medium->height.')' }}" data-lightbox="{{ 'image-'.$medium->id }}" href="{{ asset('storage/images/media/'.$medium->path) }}">
+                                                <img  class="media-img" width="100%" src="{{ asset('storage/images/media/'.$medium->path) }}"
                                                  alt="">
+                                            </a>
                                             <span class="text-bold">{{ $medium->name.' ('.$medium->width.' x '.$medium->height.')' }}</span>
                                         </div>
                                         <div class="card-footer">
@@ -79,8 +81,13 @@
     </div>
 @endsection
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('vendor/lightbox2/css/lightbox.css') }}">
+    @endsection
+
 @section('script')
     <script src="{{ asset('js/clipboard.js') }}"></script>
+    <script src="{{ asset('vendor/lightbox2/js/lightbox.js') }}"></script>
     <script>
         var clipboard = new ClipboardJS('.copy-url');
         $('[data-toggle="tooltip"]').tooltip();

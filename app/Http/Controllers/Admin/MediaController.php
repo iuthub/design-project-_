@@ -133,4 +133,16 @@ class MediaController extends Controller
 
         return response()->download('storage/images/media/' . $medium->path);
     }
+
+    public function getUploadImages(Request $request)
+    {
+        $data['columns'] = $this->mediaRepository->getSortingColumns();
+        $data['orders'] = $this->mediaRepository->getSortingOrders();
+        $data['column'] = $request->get('column') ?: null;
+        $data['order'] = $request->get('order') ?: null;
+        $data['search'] = $request->get('search') ?: null;
+        $userId = Auth::id();
+        $data['media'] = $this->mediaRepository->getAllByUserId($userId, $request->all());
+        return view('backend.media.list',$data)->render();
+    }
 }
